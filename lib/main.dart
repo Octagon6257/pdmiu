@@ -12,8 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Virtual Bookshelf',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 16.0),
+        ),
+      ),
       home: Scaffold(
-        body: Center(child: Text('Virtual Bookshelf coming soon')),
+        appBar: AppBar(title: const Text('Virtual Bookshelf')),
+        body: const Center(child: Text('Coming soon!')),
       ),
     );
   }
