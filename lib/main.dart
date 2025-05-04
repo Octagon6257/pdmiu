@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/book_provider.dart';
 import 'services/database_helper.dart';
 
 void main() async {
@@ -13,17 +15,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Virtual Bookshelf',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 16.0),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<BooksProvider>(
+          create: (_) => BooksProvider(),
         ),
-      ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Virtual Bookshelf')),
-        body: const Center(child: Text('Coming soon!')),
+      ],
+      child: MaterialApp(
+        title: 'Virtual Bookshelf',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontSize: 16.0),
+          ),
+        ),
+        home: Scaffold(
+          appBar: AppBar(title: const Text('Virtual Bookshelf')),
+          body: const Center(child: Text('Coming soon!')),
+        ),
       ),
     );
   }
