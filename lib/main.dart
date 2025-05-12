@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pdmiu/providers/book_provider.dart';
 import 'package:provider/provider.dart';
-import 'providers/book_provider.dart';
+import 'pages/home_page.dart';
 import 'services/database_helper.dart';
 
 void main() async {
@@ -29,10 +30,7 @@ class MyApp extends StatelessWidget {
             bodyMedium: TextStyle(fontSize: 16.0),
           ),
         ),
-        home: Scaffold(
-          appBar: AppBar(title: const Text('Virtual Bookshelf')),
-          body: const Center(child: Text('Coming soon!')),
-        ),
+        home: HomePage(),
       ),
     );
   }
