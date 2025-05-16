@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/responsive.dart';
+import 'bookshelf_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +11,10 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  final List<Widget> _pages = const [
+    BookshelfPage(),
+    Center(child: Text('Search coming soon')),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -19,14 +24,13 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     final horizontalPadding = Responsive.horizontalPadding(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Virtual Bookshelf')),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        child: Center(child: Text('Page ${_selectedIndex + 1} content coming soon')),
+        child: _pages[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
