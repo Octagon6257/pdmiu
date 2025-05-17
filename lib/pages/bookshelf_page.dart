@@ -31,6 +31,17 @@ class BookshelfPageState extends State<BookshelfPage> {
         return ListTile(
           title: Text(book.title),
           subtitle: Text(book.author),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: () async {
+              await booksProvider.deleteBook(book.id!);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('${book.title} deleted')),
+                );
+              }
+            },
+          ),
         );
       },
     );
