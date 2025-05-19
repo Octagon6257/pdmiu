@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/responsive.dart';
 import 'bookshelf_page.dart';
+import 'search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +14,7 @@ class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = const [
     BookshelfPage(),
-    Center(child: Text('Search coming soon')),
+    SearchPage(),
   ];
 
   void _onItemTapped(int index) {
