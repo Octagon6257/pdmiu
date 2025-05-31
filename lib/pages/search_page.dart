@@ -14,7 +14,7 @@ class SearchPage extends StatefulWidget {
 
 class SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
-  List<Book> _searchResults = [];
+  List<Map<String, dynamic>> _searchResults = [];
   bool _isLoading = false;
 
   void _searchBooks() async {
@@ -36,6 +36,64 @@ class SearchPageState extends State<SearchPage> {
           _isLoading = false;
         });
       }
+    }
+  }
+
+  void _showBookDetails(BuildContext context, Book book, String bookKey) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 16),
+            Text('Loading description...'),
+          ],
+        ),
+      ),
+    );
+
+    String description = 'No description available';
+    if (bookKey.isNotEmpty) {
+      try {
+        description = await OpenLibraryService.fetchBookDescription(bookKey);
+      } catch (e) {
+        description = 'Failed to load description';
+      }
+    }
+
+    if (context.mounted) {
+      Navigator.of(context).pop();
+    }
+
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(book.title),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Author: ${book.author}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                Text('Description:', style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                Text(description),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -62,7 +120,9 @@ class SearchPageState extends State<SearchPage> {
           child: ListView.builder(
             itemCount: _searchResults.length,
             itemBuilder: (context, index) {
-              final book = _searchResults[index];
+              final result = _searchResults[index];
+              final book = result['book'] as Book;
+              final bookKey = result['key'] as String;
               return ListTile(
                 title: Text(book.title),
                 subtitle: Text(book.author),
@@ -78,6 +138,7 @@ class SearchPageState extends State<SearchPage> {
                     }
                   },
                 ),
+                onTap: () => _showBookDetails(context, book, bookKey),
               );
             },
           ),
