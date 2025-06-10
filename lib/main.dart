@@ -3,6 +3,7 @@ import 'package:pdmiu/providers/book_provider.dart';
 import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'services/database_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,12 +26,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Virtual Bookshelf',
         theme: ThemeData(
-          primarySwatch: Colors.teal,
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(fontSize: 16.0),
-          ),
+          colorSchemeSeed: const Color(0xFF6750A4),
+          textTheme: GoogleFonts.loraTextTheme(ThemeData().textTheme),
+          useMaterial3: true,
         ),
-        home: HomePage(),
+        home: const HomePage(),
       ),
     );
   }
