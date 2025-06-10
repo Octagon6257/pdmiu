@@ -13,30 +13,33 @@
 
 ## User experience
 
-| Common action         | How it works in the UI                                                                                                                                                           |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Common action         | How it works in the UI                                                                                                                                                          |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Search for a book** | Tap the **Search** tab in the bottom navigation bar. Enter a title/author and press the search icon. Results stream in from OpenLibrary and are displayed in a scrollable list. |
-| **View book details** | Tap any search result to open a modal sheet showing the full title, author, and extended description (when available).                                                           |
-| **Add to bookshelf**  | Press the **+** icon on a search result card or in the detail sheet. A snackbar confirms *Book added!*                                                                           |
-| **Browse your shelf** | Tap the **Bookshelf** tab to view every book stored locally. The list is live‑updated via `Provider`.                                                                            |
-| **Delete a book**     | Tap the Red trash icon and confirm in the dialog. A snackbar confirms deletion.                                                                          |
+| **View book details** | Tap any search result to open a modal sheet showing the full title, author, and extended description (when available).                                                          |
+| **Add to bookshelf**  | Press the **+** icon on a search result card or in the detail sheet. A snackbar confirms *Book added!*                                                                          |
+| **Browse your shelf** | Tap the **Bookshelf** tab to view every book stored locally. The list is live‑updated via `Provider`.                                                                           |
+| **Delete a book**     | Tap the Red trash icon and confirm in the dialog. A snackbar confirms deletion.                                                                                                 |
 
-> **Screenshots**  
-> ![Search page](screenshots/search.png)  
-> ![Bookshelf page](screenshots/bookshelf.png)
+> **Screenshots**
+> <div>
+>   <img src="screenshots/search.png"  alt="Search page screenshot"  height="480" />
+>   &nbsp;&nbsp;
+>   <img src="screenshots/bookshelf.png"   alt="Bookshelf page screenshot" height="480" />
+> </div>
 
 ---
 
 ## Technology & implementations
 
-| Area | Package | Why |
-|------|------------------|-------------------|
-| **State management** | `provider` | Lightweight, used mostly for small/medium apps. |
-| **HTTP client** | `http` | Simple REST wrapper to call OpenLibrary endpoints. |
-| **Local storage** | `sqflite` + `path` | SQLite persistence layer on‑device. |
-| **Typography & palette** | `google_fonts` + Material3 `colorSchemeSeed` | To create custom UI elements while paying attention to typography and UX details. |
-| **Responsiveness** | Custom `Responsive` utility | One‑liner helpers so the UI scales elegantly in portrait/landscape and on large screens. |
-| **Multiplatform** | Flutter web & desktop targets | Same codebase runs on Web, Windows, macOS, and Linux after enabling targets with `flutter config`. |
+| Area                     | Package                                      | Why                                                                                                |
+|--------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **State management**     | `provider`                                   | Lightweight, used mostly for small/medium apps.                                                    |
+| **HTTP client**          | `http`                                       | Simple REST wrapper to call OpenLibrary endpoints.                                                 |
+| **Local storage**        | `sqflite` + `path`                           | SQLite persistence layer on‑device.                                                                |
+| **Typography & palette** | `google_fonts` + Material3 `colorSchemeSeed` | To create custom UI elements while paying attention to typography and UX details.                  |
+| **Responsiveness**       | Custom `Responsive` utility                  | One‑liner helpers so the UI scales elegantly in portrait/landscape and on large screens.           |
+| **Multiplatform**        | Flutter web & desktop targets                | Same codebase runs on Web, Windows, macOS, and Linux after enabling targets with `flutter config`. |
 
 ### Folder structure
 
